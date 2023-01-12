@@ -6,51 +6,51 @@ import java.util.Optional;
 import java.util.Set;
 
 public class Dev {
-    private String nome;
-    private Set<Conteudo> conteudosInscritos = new LinkedHashSet<>();
-    private Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
+    private String name;
+    private Set<Content> subscribedContents = new LinkedHashSet<>();
+    private Set<Content> completedContents = new LinkedHashSet<>();
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Set<Conteudo> getConteudosInscritos() {
-        return conteudosInscritos;
+    public Set<Content> getSubscribedContents() {
+        return subscribedContents;
     }
 
-    public void setConteudosInscritos(Set<Conteudo> conteudosInscritos) {
-        this.conteudosInscritos = conteudosInscritos;
+    public void setSubscribedContents(Set<Content> subscribedContents) {
+        this.subscribedContents = subscribedContents;
     }
 
-    public Set<Conteudo> getConteudosConcluidos() {
-        return conteudosConcluidos;
+    public Set<Content> getCompletedContents() {
+        return completedContents;
     }
 
-    public void setConteudosConcluidos(Set<Conteudo> conteudosConcluidos) {
-        this.conteudosConcluidos = conteudosConcluidos;
+    public void setCompletedContents(Set<Content> completedContents) {
+        this.completedContents = completedContents;
     }
 
     public void inscreverBootcamp(Bootcamp bootcamp) {
-        this.conteudosInscritos.addAll(bootcamp.getConteudos());
-        bootcamp.getDevsInscritos().add(this);
+        this.subscribedContents.addAll(bootcamp.getContents());
+        bootcamp.getSubscribedDevs().add(this);
     }
 
-    public void progredir() {
-        Optional<Conteudo> conteudo = this.conteudosInscritos.stream().findFirst();
-        if (conteudo.isPresent()) {
-            this.conteudosConcluidos.add(conteudo.get());
-            this.conteudosInscritos.remove(conteudo.get());
+    public void progress() {
+        Optional<Content> firstContent = this.subscribedContents.stream().findFirst();
+        if (firstContent.isPresent()) {
+            this.completedContents.add(firstContent.get());
+            this.subscribedContents.remove(firstContent.get());
         } else {
-            System.err.println("Você não está matriculado em nenhum conteúdo!");
+            System.err.println("You are not subscribed to any content!");
         }
     }
 
-    public double calcularTotalXp() {
-        return conteudosConcluidos.stream().mapToDouble(Conteudo::calcularXp).sum();
+    public double calculateTotalXP() {
+        return completedContents.stream().mapToDouble(Content::calculateXP).sum();
     }
 
     @Override
@@ -58,12 +58,12 @@ public class Dev {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Dev dev = (Dev) obj;
-        return Objects.equals(nome, dev.nome) && Objects.equals(conteudosInscritos, dev.conteudosInscritos) && 
-                Objects.equals(conteudosConcluidos, dev.conteudosConcluidos);
+        return Objects.equals(name, dev.name) && Objects.equals(subscribedContents, dev.subscribedContents) && 
+                Objects.equals(completedContents, dev.completedContents);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome, conteudosInscritos, conteudosConcluidos);
+        return Objects.hash(name, subscribedContents, completedContents);
     }
 }

@@ -1,48 +1,48 @@
 import java.time.LocalDate;
 
 import br.com.dio.desafio.dominio.Bootcamp;
-import br.com.dio.desafio.dominio.Curso;
+import br.com.dio.desafio.dominio.Course;
 import br.com.dio.desafio.dominio.Dev;
-import br.com.dio.desafio.dominio.Mentoria;
+import br.com.dio.desafio.dominio.Mentorship;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Curso curso1 = new Curso();
-        curso1.setTitulo("curso Java");
-        curso1.setDescricao("descricao curso Java");
-        curso1.setCargaHoraria(8);
+        Course course1 = new Course();
+        course1.setTitle("Java course");
+        course1.setDescription("Java course description");
+        course1.setNumberOfHours(8);
 
-        Curso curso2 = new Curso();
-        curso2.setTitulo("curso js");
-        curso2.setDescricao("descricao curso js");
-        curso2.setCargaHoraria(4);
+        Course course2 = new Course();
+        course2.setTitle("Javascript course");
+        course2.setDescription("Javascript course description");
+        course2.setNumberOfHours(4);
 
-        Mentoria mentoria = new Mentoria();
-        mentoria.setTitulo("mentoria");
-        mentoria.setDescricao("descricao mentoria");
-        mentoria.setData(LocalDate.now());
+        Mentorship mentorship = new Mentorship();
+        mentorship.setTitle("Mentorship");
+        mentorship.setDescription("Mentorship description");
+        mentorship.setDate(LocalDate.now());
 
         Bootcamp bootcamp = new Bootcamp();
-        bootcamp.setNome("Bootcamp Java Developer");
-        bootcamp.setDescricao("Descrição Bootcamp Java Developer");
-        bootcamp.getConteudos().add(curso1);
-        bootcamp.getConteudos().add(curso2);
-        bootcamp.getConteudos().add(mentoria);
+        bootcamp.setName("Full-stack Developer Bootcamp");
+        bootcamp.setDescription("Full-stack Developer Bootcamp description");
+        bootcamp.getContents().add(course1);
+        bootcamp.getContents().add(course2);
+        bootcamp.getContents().add(mentorship);
 
         Dev devCamila = new Dev();
-        devCamila.setNome("Camila");
+        devCamila.setName("Camila");
         devCamila.inscreverBootcamp(bootcamp);
-        System.out.println("Conteúdos inscritos Camila:" + devCamila.getConteudosInscritos());
-        devCamila.progredir();
-        System.out.println("Conteúdos inscritos Camila:" + devCamila.getConteudosInscritos());
-        System.out.println("Conteúdos concluídos Camila:" + devCamila.getConteudosConcluidos());
-        System.out.println("XP Camila:" + devCamila.calcularTotalXp());
+        System.out.println(devCamila.getName() + "'s subscribed content:" + devCamila.getSubscribedContents());
+        devCamila.progress();
+        System.out.println(devCamila.getName() + "'s subscribed content:" + devCamila.getSubscribedContents());
+        System.out.println(devCamila.getName() + "'s completed content:" + devCamila.getCompletedContents());
+        System.out.println(devCamila.getName() + "'s XP:" + devCamila.calculateTotalXP());
         
         Dev devJoao = new Dev();
-        devJoao.setNome("João");
+        devJoao.setName("João");
         devJoao.inscreverBootcamp(bootcamp);
-        System.out.println("Conteúdos inscritos Joao:" + devJoao.getConteudosInscritos());
-        System.out.println("Conteúdos concluídos Joao:" + devJoao.getConteudosConcluidos());
-        System.out.println("XP Joao:" + devJoao.calcularTotalXp());
+        System.out.println(devJoao.getName() + "'s subscribed content:" + devJoao.getSubscribedContents());
+        System.out.println(devJoao.getName() + "'s completed content:" + devJoao.getCompletedContents());
+        System.out.println(devJoao.getName() + "'s XP:" + devJoao.calculateTotalXP());
     }
 }
